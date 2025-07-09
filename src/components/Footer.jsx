@@ -7,7 +7,7 @@ export default function Footer() {
 
   useEffect(() => {
     axios
-      .get('https://gomowebb.com/headless-poc/wp-json/myroutes/menu/4')
+      .get('https://gomowebb.com/headless-poc/wp-json/myroutes/menu/')
       .then((res) => setFooterMenu(res.data || []))
       .catch((err) => console.error('Footer menu load error:', err));
   }, []);
