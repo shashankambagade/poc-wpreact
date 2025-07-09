@@ -19,7 +19,7 @@ export default function Footer() {
         <div className="col-span-1">
           <img src="/footer-FKAB-logo.png" alt="FKAB Logo" className="h-10 mb-4" />
           <p className="mb-6 text-sm leading-relaxed">
-            Delivering sustainable marine design solutions with innovation and excellence since 1961.
+            Delivering sustainable marine design solutions with innovation and excellence since 1961..
           </p>
           <a
             href="/contact"
