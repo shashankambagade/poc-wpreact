@@ -3,6 +3,14 @@ import axios from 'axios';
 const BASE_URL = 'https://gomowebb.com/headless-poc/wp-json/wp/v2';
 const CF7_URL = 'https://gomowebb.com/headless-poc/wp-json/contact-form-7/v1/contact-forms/123/feedback';
 
+//API to fetch Woocommerce Products
+const WC_BASE_URL = 'https://gomowebb.com/headless-poc/wp-json/wc';
+const WC_URL = 'https://gomowebb.com/headless-poc/wp-json/wc/v3';
+const WC_AUTH = {
+  username: 'ck_72711cd6713318569a8c2665226f74f34e75a95e', // Consumer Key
+  password: 'cs_25775b7891ebb40e89eefdb996673246c0d2a320'  // Consumer Secret
+};
+
 // Generic fetcher for simple GET requests
 const getResource = (endpoint, params = {}) =>
   axios.get(`${BASE_URL}/${endpoint}`, { params }).then(res => res.data);
@@ -80,3 +88,23 @@ export const getMenuItems = () =>
 // ---------- Contact Form ----------
 export const submitContactForm = formData =>
   axios.post(CF7_URL, formData);
+
+// ---------- Woocommerce ----------
+export const getAllProducts = (params = {}) =>
+  axios
+    .get(`${WC_URL}/products`, {
+      auth: WC_AUTH,
+      params
+    })
+    .then(res => res.data);
+
+    
+//API to fetch Single Woocommerce Product by slug
+export const getProductBySlug = (slug) =>
+  axios.get(`${WC_BASE_URL}/v3/products`, {
+    params: { slug },
+    auth: {
+      username: 'ck_72711cd6713318569a8c2665226f74f34e75a95e', // Consumer Key
+      password: 'cs_25775b7891ebb40e89eefdb996673246c0d2a320'  // Consumer Secret
+    },
+  }).then(res => res.data);
