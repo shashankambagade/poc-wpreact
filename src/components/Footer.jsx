@@ -7,7 +7,7 @@ export default function Footer() {
 
   useEffect(() => {
     axios
-      .get('https://gomowebb.com/headless-poc/wp-json/myroutes/menu/')
+      .get('https://gomowebb.com/headless-poc/wp-json/myroutes/menu/') 
       .then((res) => setFooterMenu(res.data || []))
       .catch((err) => console.error('Footer menu load error:', err));
   }, []);
@@ -28,7 +28,7 @@ export default function Footer() {
             CONTACT US ↗
           </a>
         </div>
- 
+
         {/* Globe Image */}
         <div className="col-span-1 flex justify-center items-start">
           <img
@@ -42,13 +42,27 @@ export default function Footer() {
         <div className="col-span-1">
           <h4 className="font-semibold text-lg mb-4">Important Links</h4>
           <ul className="space-y-2">
-            {footerMenu.map((item) => (
-              <li key={item.ID}>
-                <a href={item.url} className="text-sm hover:underline">
-                  {item.title}
-                </a>
-              </li>
-            ))}
+            {footerMenu.map((item) => {
+              const hasUrl = item.url && item.url.trim() !== '';
+              return (
+                <li key={item.ID}>
+                  {hasUrl ? (
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm hover:underline"
+                    >
+                      {item.title}
+                    </a>
+                  ) : (
+                    <span className="text-sm text-gray-400">
+                      {item.title}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -65,10 +79,20 @@ export default function Footer() {
               </a>
             </p>
             <div className="flex gap-4 pt-4">
-              <a href="#" className="w-8 h-8 rounded-full border flex items-center justify-center hover:bg-white hover:text-blue-900 transition">
+              <a
+                href="#"
+                onClick={(e) => e.preventDefault()}
+                aria-disabled="true"
+                className="w-8 h-8 rounded-full border flex items-center justify-center hover:bg-white hover:text-blue-900 transition"
+              >
                 <i className="fab fa-linkedin-in"></i>
               </a>
-              <a href="#" className="w-8 h-8 rounded-full border flex items-center justify-center hover:bg-white hover:text-blue-900 transition">
+              <a
+                href="#"
+                onClick={(e) => e.preventDefault()}
+                aria-disabled="true"
+                className="w-8 h-8 rounded-full border flex items-center justify-center hover:bg-white hover:text-blue-900 transition"
+              >
                 <i className="fab fa-youtube"></i>
               </a>
             </div>
@@ -80,8 +104,22 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto border-t border-white/20 mt-12 pt-6 text-sm flex flex-col md:flex-row justify-between items-center gap-4">
         <p>&copy; {new Date().getFullYear()} | All Rights Reserved</p>
         <div className="flex gap-6">
-          <a href="#" className="hover:underline">Privacy and Integrity Policy</a>
-          <a href="#" className="hover:underline">Cookies Policy</a>
+          <a
+            href="#"
+            onClick={(e) => e.preventDefault()}
+            aria-disabled="true"
+            className="hover:underline"
+          >
+            Privacy and Integrity Policy
+          </a>
+          <a
+            href="#"
+            onClick={(e) => e.preventDefault()}
+            aria-disabled="true"
+            className="hover:underline"
+          >
+            Cookies Policy
+          </a>
         </div>
       </div>
     </footer>
